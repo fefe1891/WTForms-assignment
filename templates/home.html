@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-center">Pet Adoption</h1>
+<div class="container">
+    {% for pet in pets %}
+    <div class="row">
+        <div class="col-sm-3">
+            <h2><a href="{{ url_for('edit_pet', pet_id=pet.id) }}">{{ pet.name }}</a></h2>
+            {% if pet.available %}
+            <p><strong>Available</strong></p>
+            {% else %}
+            <p>Not Available</p>
+            {% endif %}
+            {% if pet.photo_url %}
+            <!-- set maximum width of the image to 100% of its container -->
+            <img src="{{ pet.photo_url }}" alt="picture of {{ pet.name }}"class="img-responsive">
+            {% else %}
+            <!-- local image used if no image URL is found for the pet -->
+            <img src="{{ url_for('static', filename='quudOlU.jpeg') }}"alt="Default picture for {{ pet.name }}" class="img-responsive">
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
